@@ -17,7 +17,7 @@ window = sg.Window('Login v2', layout=layout)
 # Ler os eventos
 while True:
     eventos, valores = window.read()
-    print(valores)
+
     if eventos == sg.WIN_CLOSED or eventos == 'Sair':
         break
     elif eventos == 'Login':
@@ -29,4 +29,4 @@ while True:
             window['mensagem'].update('Login realizado com sucesso!')
         else:
             window['mensagem'].update('Usuário ou senha inválida!')
-window.close ()
+window.close()

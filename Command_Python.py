@@ -36,8 +36,12 @@ pip uninstall -y (pip freeze)
 # + Tem um ciclo de lançamento independente do python
 # + É extensível
 # + Tem um API de código
+# Instalação:
 pip install virtualenv
+# Criar ambiente virtual
 virtualenv venv
+# Desativar o ambiente
+deactivate
 
 #----------------------------requirements.txt------------------------------
 # Documentação: https://pip.pypa.io/en/stable/reference/requirements-file-format/
@@ -102,7 +106,7 @@ pip uninstall numpy
 pip uninstall -y (pip freeze)
 
 #-------------------------pip-autoremove-----------------------------------------
-# Ferramenta remover dependências de pacotes
+# Remove do ambiente as bibliotecas dependentes
 pip install pip-autoremove
 
 # Remover pacotes e suas dependências
@@ -111,9 +115,20 @@ pip-autoremove pandas
 # Se der erro na execução pip-autoremove copiar o arquivo pip_autoremove.py para C:\Program Files\Python311\Lib ou C:\Users\Username\Documents\venv\Lib
 
 #------------------------pipdeptree---------------------------------------------
-# Mostra todas dependências dos pacotes
+# Mostra quais bibliotecas depende de quais
 # Instalação:
 pip install pipdeptree
 
 # Listando as dependências dos pacotes
 pipdeptree
+
+#------------------------pipx---------------------------------------------------
+# Instala ferramentas de linha de comando em um ambiente virtual isolado, bom para instalações globais
+# Instalação:
+pip install pipx
+
+# Consultar pacotes instalados no pipx
+pipx list
+
+# Instalação de pacotes:
+pipx install 
