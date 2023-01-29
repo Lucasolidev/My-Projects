@@ -16,16 +16,18 @@ class PassGen:
         sg.theme('Black')
         layout = [
             [sg.Text('Site/Software:', size=(11, 1)),
-             sg.Input(key='site', size=(23, 1))],
+             sg.Input(key='site', size=(23, 1), expand_x=True)],
             [sg.Text('E-mail/Usuário:', size=(11, 1)),
-             sg.Input(key='usuário', size=(23, 1))],
-            [sg.Text('Quantidade de caracteres'), sg.Combo(values=list(
-                range(6, 17)), key='total_chars', default_value=10, size=(3, 1))],
-            [sg.Output(size=(36, 5))],
-            [sg.Button('Gerar Senha')],
-            [sg.Button('Salvar')],
-            [sg.Button('Limpar')],
-            [sg.Button('Sair')],
+             sg.Input(key='usuario', size=(23, 1), expand_x=True)],
+            [sg.Text('Quantidade de caracteres:'), sg.Combo(values=list(
+                range(6, 17)), key='total_chars', default_value=10, size=(3, 1), expand_x=True)],
+            [sg.Output(key='textbox', size=(36, 6),
+                       expand_x=True, expand_y=True)],
+            [sg.Button('Gerar Senha', expand_x=True),
+             sg.Button('Limpar', expand_x=True)],
+            [sg.Button('Salvar', expand_x=True), sg.Button(
+                'Remover Senhas', expand_x=True)],
+            [sg.Button('Sair', expand_x=True)]
         ]
         # Declarar a Janela
         self.janela = sg.Window('Gerador de Senha 2023', layout)
@@ -34,13 +36,18 @@ class PassGen:
     def Iniciar(self):
         while True:
             evento, valores = self.janela.read()
-            if evento == sg.WINDOW_CLOSED:
+            if evento == sg.WIN_CLOSED or evento == 'Sair':
                 break
             if evento == 'Gerar Senha':
                 nova_senha = self.gerar_senha(valores)
-                print(nova_senha)
-            if evento == 'Sair':
-                break
+                print(
+                    f"Site/Software: {valores['site']}\nUsuário: {valores['usuario']}\nSenha: {nova_senha}\n")
+            if evento == 'Salvar':
+                self.salvar_senha(nova_senha, valores)
+            if evento == 'Limpar':
+                self.limpar_entradas(valores)
+            if evento == 'Remover Senhas':
+                self.remover_senha()
 
     def gerar_senha(self, valores):
         char_list = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijk1lmnopgrstuvwxyz1234567890!@#$%&*"
@@ -49,10 +56,21 @@ class PassGen:
         return new_pass
 
     def salvar_senha(self, nova_senha, valores):
-        with open('senhas.txt', 'a', newline='') as arquivo:
-            arquivo.write(
-                f"Site: {valores[site]}, Usuário: {valores['usuario']}, Nova Senha: {nova_senha}")
-            print("Senha salva para o arquivo 'Senhas.txt'")
+        with open('Senhas.txt', 'a') as file:
+            file.write(
+                f"Site/Software: {valores['site']}\nUsuário: {valores['usuario']}\nSenha: {nova_senha}\n\n")
+        print("Senha salva no arquivo 'Senhas.txt'")
+
+    def limpar_entradas(self, valores):
+        for key in valores:
+            self.janela[key].update('')
+            self.janela['textbox'].update('')
+        return None
+
+    def remover_senha(self):
+        with open('Senhas.txt', 'w') as file:
+            file.write("")
+            print("Todas as senhas removida com sucesso do arquivo 'Senha.txt'")
 
 
 gen = PassGen()
