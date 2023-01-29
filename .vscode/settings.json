@@ -1,5 +1,12 @@
 {
     "python.analysis.typeCheckingMode": "basic",
     "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true
+    "python.linting.enabled": true,
+    "cSpell.language": "en,pt-BR",
+    "cSpell.words": [
+        "pipdeptree"
+    ],
+    "commentTranslate.source": "Google",
+    "commentTranslate.targetLanguage": "pt",
+    "cSpell.language": "en,pt,pt_BR",
 }

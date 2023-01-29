@@ -1,0 +1,7 @@
+# requirements_dev.txt
+-r requirements.txt # instala as de produção
+
+# Bibliotecas de desenvolvimento
+ipdb    # debugger
+ipython # shell interativo
+black   # formatador de código
